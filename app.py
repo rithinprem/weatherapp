@@ -48,7 +48,7 @@ if __name__ == "__main__":
     flask_thread = threading.Thread(target=run_flask)
     flask_thread.start()
 
-    # Schedule the job to run every 5 minutes
+    # Schedule the job to run every 10 minutes
     schedule.every(10).minutes.do(send_request)
 
     # Run the scheduled jobs continuously
