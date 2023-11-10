@@ -11,22 +11,24 @@ def homepage():
 
 @app.route('/weatherapp',methods =['POST','GET'])
 def get_weatherdata():
-    url = "https://api.openweathermap.org/data/2.5/weather"
+    url = "https://api.weatherapi.com/v1/current.json?"
+    
+    params ={"key":"2a0ca514d16545f3a0622421231011",
+            "q":request.form.get("city")}
+
+
    
-    params ={ 'q':request.form.get("city"),
-             'appid': "5174c48a3535ca0b041ba725368a7722",
-              'units':"metric"}
+    # params ={ 'q':request.form.get("city"),
+    #          'appid': "5174c48a3535ca0b041ba725368a7722",
+    #           'units':"metric"}
 
 
     response = requests.get(url,params)
     data = response.json()
-    city= data['name']
-
-
     return render_template("output.html",weather_data=data)
 
 if __name__=="__main__":
-    app.run(host="0.0.0.0",port=5005)
+    app.run(host="0.0.0.0",port=5002)
 
 
 

@@ -3,71 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Output</title>
+    <title>Weather Information</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f4f4f4;
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+            color: #ffffff; /* Text color */
         }
 
         .weather-container {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            background: linear-gradient(to bottom, #ffffff, #f0f8ff); /* Gradient background for the card */
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            padding: 30px;
             margin: auto;
             max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333333;
+            font-size: 36px;
+            margin-bottom: 20px;
         }
 
         .weather-item {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .label {
             font-weight: bold;
+            font-size: 18px;
+            color: #333333;
+        }
+
+        .weather-icon {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        .condition {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .temperature {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ff4500; /* Orange for temperature */
+        }
+
+        .detail {
+            font-size: 18px;
+            color: #555555;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888888;
         }
     </style>
 </head>
 <body>
 
     <div class="weather-container">
-        <h1>Weather Information for {{ weather_data['name'] }}</h1>
+        <h1>Weather in {{ weather_data['location']['name'] }}, {{ weather_data['location']['country'] }}</h1>
 
-        <div class="weather-item">
-            <span class="label">Temperature:</span> 
-            <span>{{ weather_data['main']['temp'] }}°C</span>
+        <div class="weather-item condition">
+            <img src="https:{{ weather_data['current']['condition']['icon'] }}" alt="Weather Icon" class="weather-icon">
+            <span class="label">Condition:</span>
+            <span class="detail">{{ weather_data['current']['condition']['text'] }}</span>
         </div>
 
         <div class="weather-item">
-            <span class="label">Feels Like:</span> 
-            <span>{{ weather_data['main']['feels_like'] }}°C</span>
+            <span class="label">Temperature:</span>
+            <span class="temperature">{{ weather_data['current']['temp_c'] }}°C / {{ weather_data['current']['temp_f'] }}°F</span>
         </div>
 
         <div class="weather-item">
-            <span class="label">Weather:</span> 
-            <span>{{ weather_data['weather'][0]['description'] }}</span>
+            <span class="label">Wind:</span>
+            <span class="detail">{{ weather_data['current']['wind_kph'] }} km/h, {{ weather_data['current']['wind_mph'] }} mph, {{ weather_data['current']['wind_dir'] }}</span>
         </div>
 
         <div class="weather-item">
-            <span class="label">Pressure:</span> 
-            <span>{{ weather_data['main']['pressure'] }} hPa</span>
+            <span class="label">Pressure:</span>
+            <span class="detail">{{ weather_data['current']['pressure_mb'] }} mb, {{ weather_data['current']['pressure_in'] }} in</span>
         </div>
 
         <div class="weather-item">
-            <span class="label">Humidity:</span> 
-            <span>{{ weather_data['main']['humidity'] }}%</span>
+            <span class="label">Humidity:</span>
+            <span class="detail">{{ weather_data['current']['humidity'] }}%</span>
         </div>
 
         <div class="weather-item">
-            <span class="label">Wind Speed:</span> 
-            <span>{{ weather_data['wind']['speed'] }} m/s</span>
+            <span class="label">Cloudiness:</span>
+            <span class="detail">{{ weather_data['current']['cloud'] }}%</span>
         </div>
 
         <div class="weather-item">
-            <span class="label">Cloudiness:</span> 
-            <span>{{ weather_data['clouds']['all'] }}%</span>
+            <span class="label">Feels Like:</span>
+            <span class="detail">{{ weather_data['current']['feelslike_c'] }}°C / {{ weather_data['current']['feelslike_f'] }}°F</span>
+        </div>
+
+        <div class="weather-item">
+            <span class="label">Visibility:</span>
+            <span class="detail">{{ weather_data['current']['vis_km'] }} km / {{ weather_data['current']['vis_miles'] }} miles</span>
+        </div>
+
+        <div class="weather-item">
+            <span class="label">UV Index:</span>
+            <span class="detail">{{ weather_data['current']['uv'] }}</span>
+        </div>
+
+        <div class="weather-item">
+            <span class="label">Gust Speed:</span>
+            <span class="detail">{{ weather_data['current']['gust_kph'] }} km/h, {{ weather_data['current']['gust_mph'] }} mph</span>
+        </div>
+
+        <div class="footer">
+            Powered by WeatherAPI.com
         </div>
     </div>
 
