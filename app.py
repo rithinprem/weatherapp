@@ -18,11 +18,11 @@ def reset_activity():
 # Function to automatically ping the /ping endpoint at regular intervals
 def automatic_ping():
     while True:
-        # Ping the /ping endpoint within the application
-        with app.test_request_context('/ping'):
-            app.process_request(request.Request('/ping', method='GET'))
+        # Use the test client to simulate a request to the /ping endpoint
+        with app.test_client() as client:
+            client.get('/ping')
 
-        time.sleep(600)  # Adjust the interval based on your needs (e.g., every 10 minutes)
+        time.sleep(60)  # Adjust the interval based on your needs (e.g., every 10 minutes)
 
 # Start the background thread to reset activity
 activity_reset_thread = threading.Thread(target=reset_activity)
@@ -63,4 +63,3 @@ def before_request():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5002)
-
