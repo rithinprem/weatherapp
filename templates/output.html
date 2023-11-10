@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Output</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .weather-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: auto;
+            max-width: 600px;
+        }
+
+        .weather-item {
+            margin-bottom: 15px;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="weather-container">
+        <h1>Weather Information for {{ weather_data['name'] }}</h1>
+
+        <div class="weather-item">
+            <span class="label">Temperature:</span> 
+            <span>{{ weather_data['main']['temp'] }}°C</span>
+        </div>
+
+        <div class="weather-item">
+            <span class="label">Feels Like:</span> 
+            <span>{{ weather_data['main']['feels_like'] }}°C</span>
+        </div>
+
+        <div class="weather-item">
+            <span class="label">Weather:</span> 
+            <span>{{ weather_data['weather'][0]['description'] }}</span>
+        </div>
+
+        <div class="weather-item">
+            <span class="label">Pressure:</span> 
+            <span>{{ weather_data['main']['pressure'] }} hPa</span>
+        </div>
+
+        <div class="weather-item">
+            <span class="label">Humidity:</span> 
+            <span>{{ weather_data['main']['humidity'] }}%</span>
+        </div>
+
+        <div class="weather-item">
+            <span class="label">Wind Speed:</span> 
+            <span>{{ weather_data['wind']['speed'] }} m/s</span>
+        </div>
+
+        <div class="weather-item">
+            <span class="label">Cloudiness:</span> 
+            <span>{{ weather_data['clouds']['all'] }}%</span>
+        </div>
+    </div>
+
+</body>
+</html>
